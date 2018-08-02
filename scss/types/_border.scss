@@ -56,54 +56,52 @@
 * (.button-primary, .button-secondary, etc.)
 */
 
-#{$ubtn-namespace}-border,
-#{$ubtn-namespace}-border-thin,
-#{$ubtn-namespace}-border-thick {
+@each $ubtn-color in $ubtn-colors {
+  $ubtn-name: nth($ubtn-color, 1);
+  $ubtn-background: nth($ubtn-color, 2);
+  $ubtn-color: nth($ubtn-color, 3);
 
-  @each $ubtn-color in $ubtn-colors {
-    $ubtn-name: nth($ubtn-color, 1);
-    $ubtn-background: nth($ubtn-color, 2);
-    $ubtn-color: nth($ubtn-color, 3);
-    $ubtn-color-namespace: $ubtn-namespace + '-' + $ubtn-name;
+  #{$ubtn-namespace}-border-#{$ubtn-name},
+  #{$ubtn-namespace}-border-thin-#{$ubtn-name},
+  #{$ubtn-namespace}-border-thick-#{$ubtn-name} {
+    color: $ubtn-background;
 
-    &#{$ubtn-color-namespace} {
-      color: $ubtn-background;
+    &:hover,
+    &:focus {
+      background-color: rgba(lighten($ubtn-background, 10%), .9);
+      color: rgba($ubtn-color, .9);
+    }
 
-      &:hover,
-      &:focus {
-        background-color: rgba(lighten($ubtn-background, 10%), .9);
-        color: rgba($ubtn-color, .9);
+    &:active,
+    &.active,
+    &.is-active {
+      background-color: rgba(desaturate($ubtn-background, 10%), .7);
+      color: rgba($ubtn-color, .5);
+
+      @if $ubtn-use-compass {
+        @include opacity(.3);
       }
-
-      &:active,
-      &.active,
-      &.is-active {
-        background-color: rgba(desaturate($ubtn-background, 10%), .7);
-        color: rgba($ubtn-color, .5);
-
-        @if $ubtn-use-compass {
-          @include opacity(.3);
-        }
-        @else {
-          opacity: .3;
-        }
+      @else {
+        opacity: .3;
       }
     }
-  }
 
-  /*
-  * Border Button Size Adjustment
-  *
-  * The line-height must be adjusted to compinsate for
-  * the width of the border.
-  */
-  @each $ubtn-sizes-hash in $ubtn-sizes {
-    $ubtn-size: nth($ubtn-sizes-hash, 1);
-    $ubtn-multiplier : nth($ubtn-sizes-hash, 2);
-    $ubtn-size-namespace: #{$ubtn-namespace}-#{$ubtn-size};
+    /*
+    * Border Button Size Adjustment
+    *
+    * The line-height must be adjusted to compinsate for
+    * the width of the border.
+    *
+    * TODO: Flatten these.
+    */
+    @each $ubtn-sizes-hash in $ubtn-sizes {
+      $ubtn-size: nth($ubtn-sizes-hash, 1);
+      $ubtn-multiplier : nth($ubtn-sizes-hash, 2);
+      $ubtn-size-namespace: #{$ubtn-namespace}-#{$ubtn-size};
 
-    &#{$ubtn-size-namespace} {
-      line-height: $ubtn-height * $ubtn-multiplier - 4;
+      &#{$ubtn-size-namespace} {
+        line-height: $ubtn-height * $ubtn-multiplier - 4;
+      }
     }
   }
 }

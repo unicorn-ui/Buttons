@@ -18,26 +18,3 @@
     }
   }
 }
-
-
-/*
-* Size Adjustment for equal height & widht buttons
-*
-* Remove padding and set a fixed width.
-*/
-#{$ubtn-namespace}-circle,
-#{$ubtn-namespace}-box,
-#{$ubtn-namespace}-square {
-  padding: 0 !important;
-  width: $ubtn-height;
-
-  @each $ubtn-sizes-hash in $ubtn-sizes {
-    $ubtn-size: nth($ubtn-sizes-hash, 1);
-    $ubtn-multiplier : nth($ubtn-sizes-hash, 2);
-    $ubtn-size-namespace: #{$ubtn-namespace}-#{$ubtn-size};
-
-    &#{$ubtn-size-namespace} {
-      width: $ubtn-height * $ubtn-multiplier;
-    }
-  }
-}

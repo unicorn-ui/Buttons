@@ -141,6 +141,8 @@
   // Crete class for .button-primary
   // and legacy flat .button-primary-flat
   #{$ubtn-namespace}-#{$ubtn-name},
+  #{$ubtn-namespace}-raised-#{$ubtn-name},
+  #{$ubtn-namespace}-glow-#{$ubtn-name},
   #{$ubtn-namespace}-#{$ubtn-name}-flat {
     background-color: $ubtn-background;
     border-color: $ubtn-background;

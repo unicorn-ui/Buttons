@@ -46,40 +46,39 @@
 /*
 * Raised Button Colors
 *
-* Create colors for raised buttons
+* Create colors for raised buttons (e.g. button-raised-primary). Note,
+* we do inherit some base color definitions (see _base.scss)
 */
-#{$ubtn-namespace}-raised {
-  @each $ubtn-color in $ubtn-colors {
-    $ubtn-name: nth($ubtn-color, 1);
-    $ubtn-background: nth($ubtn-color, 2);
-    $ubtn-color: nth($ubtn-color, 3);
-    $ubtn-color-namespace: $ubtn-namespace + '-' + $ubtn-name;
+@each $ubtn-color in $ubtn-colors {
+  $ubtn-name: nth($ubtn-color, 1);
+  $ubtn-background: nth($ubtn-color, 2);
+  $ubtn-color: nth($ubtn-color, 3);
+  $ubtn-color-namespace: $ubtn-namespace + '-raised-' + $ubtn-name;
 
-    &#{$ubtn-color-namespace} {
-      border-color: darken($ubtn-background, 5%);
+  #{$ubtn-color-namespace} {
+    border-color: darken($ubtn-background, 5%);
 
+    @if($ubtn-use-compass) {
+      @include background(linear-gradient(top,  lighten($ubtn-background, 5%), darken($ubtn-background, 5%)));
+    }
+    @else {
+      background: linear-gradient(lighten($ubtn-background, 5%), darken($ubtn-background, 5%));
+    }
+
+    &:hover,
+    &:focus {
       @if($ubtn-use-compass) {
-        @include background(linear-gradient(top,  lighten($ubtn-background, 5%), darken($ubtn-background, 5%)));
+        @include background(linear-gradient(top,  lighten($ubtn-background, 8%), darken($ubtn-background, 7%)));
       }
       @else {
-        background: linear-gradient(lighten($ubtn-background, 5%), darken($ubtn-background, 5%));
+        background: linear-gradient(top,  lighten($ubtn-background, 8%), darken($ubtn-background, 7%));
       }
-
-      &:hover,
-      &:focus {
-        @if($ubtn-use-compass) {
-          @include background(linear-gradient(top,  lighten($ubtn-background, 8%), darken($ubtn-background, 7%)));
-        }
-        @else {
-          background: linear-gradient(top,  lighten($ubtn-background, 8%), darken($ubtn-background, 7%));
-        }
-      }
-      &:active,
-      &.active,
-      &.is-active  {
-        border-color: darken($ubtn-background, 10%);
-        background: desaturate($ubtn-background, 10%);
-      }
+    }
+    &:active,
+    &.active,
+    &.is-active  {
+      border-color: darken($ubtn-background, 10%);
+      background: desaturate($ubtn-background, 10%);
     }
   }
 }

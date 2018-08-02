@@ -107,16 +107,14 @@ $ubtn-default-glow-color: #2c9adb !default;
 * Create colors for glowing buttons
 */
 
-#{$ubtn-namespace}-glow {
-  @each $ubtn-color in $ubtn-colors {
-    $ubtn-name: nth($ubtn-color, 1);
-    $ubtn-background: nth($ubtn-color, 2);
-    $ubtn-color: nth($ubtn-color, 3);
-    $ubtn-color-namespace: $ubtn-namespace + '-' + $ubtn-name;
+@each $ubtn-color in $ubtn-colors {
+  $ubtn-name: nth($ubtn-color, 1);
+  $ubtn-background: nth($ubtn-color, 2);
+  $ubtn-color: nth($ubtn-color, 3);
+  $ubtn-color-namespace: $ubtn-namespace + '-glow-' + $ubtn-name;
 
-    &#{$ubtn-color-namespace} {
-      animation-name: glowing-#{$ubtn-name};
-    }
+  #{$ubtn-color-namespace} {
+    animation-name: glowing-#{$ubtn-name};
   }
 }
 
